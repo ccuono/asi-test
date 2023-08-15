@@ -1,7 +1,7 @@
 using AsiTest.Business.Entities.Contact;
 using Microsoft.EntityFrameworkCore;
 
-namespace AsiTest.Business.Contexts.InMemory;
+namespace AsiTest.Business.Contexts;
 
 public class ApplicationContext : DbContext
 {
@@ -11,4 +11,11 @@ public class ApplicationContext : DbContext
     
     public DbSet<Contact>? Contacts { get; set; }
     public DbSet<Email>? Emails { get; set; }
+    
+    // protected override void OnModelCreating(ModelBuilder modelBuilder)
+    // {
+    //     modelBuilder.Entity<Contact>()
+    //         .HasMany<Email>();
+    // }
+    
 }

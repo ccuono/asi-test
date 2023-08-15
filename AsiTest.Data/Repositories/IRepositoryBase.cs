@@ -4,6 +4,7 @@ namespace AsiTest.Business.Repositories;
 
 public interface IRepositoryBase<T>
 {
+    T? FindById(long id);
     IQueryable<T> FindAll(); 
     IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression); 
     void Create(T entity); 

@@ -1,6 +1,4 @@
 using System.Linq.Expressions;
-using AsiTest.Business.Contexts;
-using AsiTest.Business.Contexts.InMemory;
 using Microsoft.EntityFrameworkCore;
 
 namespace AsiTest.Business.Repositories;
@@ -11,6 +9,11 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     public RepositoryBase(DbContext repositoryContext) 
     {
         _repositoryContext = repositoryContext; 
+    }
+
+    public T? FindById(long id)
+    {
+        return _repositoryContext.Find<T>(id);
     }
 
     public IQueryable<T> FindAll() => _repositoryContext.Set<T>().AsNoTracking();
