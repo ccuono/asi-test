@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsiTest.Http", "AsiTest.Http\AsiTest.Http.csproj", "{1E3E16A8-09F1-4C9D-808D-46CB46B678E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsiTest.Data", "AsiTest.Data\AsiTest.Data.csproj", "{B565BCC7-3B7D-4399-AC07-638D192AAC03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsiTest.Console", "AsiTest.Console\AsiTest.Console.csproj", "{5413967F-1EFB-41F2-BD63-16F3852BFE21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E3E16A8-09F1-4C9D-808D-46CB46B678E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E3E16A8-09F1-4C9D-808D-46CB46B678E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E3E16A8-09F1-4C9D-808D-46CB46B678E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E3E16A8-09F1-4C9D-808D-46CB46B678E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B565BCC7-3B7D-4399-AC07-638D192AAC03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B565BCC7-3B7D-4399-AC07-638D192AAC03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B565BCC7-3B7D-4399-AC07-638D192AAC03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B565BCC7-3B7D-4399-AC07-638D192AAC03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5413967F-1EFB-41F2-BD63-16F3852BFE21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5413967F-1EFB-41F2-BD63-16F3852BFE21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5413967F-1EFB-41F2-BD63-16F3852BFE21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5413967F-1EFB-41F2-BD63-16F3852BFE21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
