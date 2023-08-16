@@ -1,3 +1,4 @@
+using AsiTest.Business.Data.Testing;
 using AsiTest.Business.Entities.Contact;
 using AsiTest.Business.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,6 @@ public class ContactsController : ControllerBase
     /// Constructor
     /// Removed `ILogger&lt;ContactsController&gt; logger` since it is not used
     /// </summary>
-    /// <param name="logger"></param>
     /// <param name="contactService"></param>
     public ContactsController(IContactService contactService)
     {
@@ -43,7 +43,7 @@ public class ContactsController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet(Name = "GetContacts")]
-    public IEnumerable<Contact> Get(DateOnly? startDate, DateOnly? endDate)
+    public IEnumerable<Contact> Get(DateOnly? startDate = null, DateOnly? endDate = null)
     {
         if (startDate == null || endDate == null)
         {
