@@ -9,7 +9,7 @@ namespace AsiTest.Business.Services;
 /// <summary>
 /// Service for CRUD operations on Contact and Email entities
 /// </summary>
-public class ContactService
+public class ContactService : IContactService
 {
     private readonly ContactRepository _contactRepository;
     private readonly EmailRepository _emailRepository;
@@ -21,7 +21,7 @@ public class ContactService
         _contactRepository = new ContactRepository(applicationContext);
         _emailRepository = new EmailRepository(applicationContext);
     }
-    
+
     #region create
 
     /// <summary>
@@ -31,13 +31,13 @@ public class ContactService
     public void CreateContact(Contact contact)
     {
         contact.Emails.CorrectEmails();
-        
-        _contactRepository.Create(contact); 
+
+        _contactRepository.Create(contact);
         _applicationContext.SaveChanges();
     }
-    
+
     #endregion create
-    
+
     #region read
 
     /// <summary>
@@ -49,6 +49,16 @@ public class ContactService
     {
         // would prefer to use `_contactRepository.FindById(id);` but it will not hydrate the Emails if that is used...
         return _contactRepository.FindByCondition(c => c.Id == id).Include(c => c.Emails).FirstOrDefault();
+    }
+    
+    /// <summary>
+    /// Returns contact with supplied id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Email? GetEmailById(long id)
+    {
+        return _emailRepository.FindById(id);
     }
 
     /// <summary>
@@ -67,7 +77,9 @@ public class ContactService
     /// <returns></returns>
     public IEnumerable<Contact> FindContacts(string name)
     {
-        return _contactRepository.FindByCondition(c => c.Name.IndexOf(name, StringComparison.InvariantCultureIgnoreCase) > -1).Include(c => c.Emails);
+        return _contactRepository
+            .FindByCondition(c => c.Name.IndexOf(name, StringComparison.InvariantCultureIgnoreCase) > -1)
+            .Include(c => c.Emails);
     }
 
     /// <summary>
@@ -78,13 +90,14 @@ public class ContactService
     /// <returns></returns>
     public IEnumerable<Contact> FindContacts(DateOnly startDate, DateOnly endDate)
     {
-        return _contactRepository.FindByCondition(c => c.BirthDate >= startDate && c.BirthDate <= endDate).Include(c => c.Emails);
+        return _contactRepository.FindByCondition(c => c.BirthDate >= startDate && c.BirthDate <= endDate)
+            .Include(c => c.Emails);
     }
 
     #endregion read
-    
+
     #region update
-    
+
     /// <summary>
     /// Updates a contact with the supplied contact object
     /// </summary>
@@ -92,13 +105,33 @@ public class ContactService
     public void UpdateContact(Contact contact)
     {
         contact.Emails.CorrectEmails();
-        
-        _contactRepository.Update(contact); 
+
+        var existingContact = GetContactById(contact.Id);
+
+        if (existingContact == null)
+        {
+            throw new KeyNotFoundException($"{nameof(contact)}.{nameof(contact.Id)} does not exist");
+        }
+
+        foreach (var missingEmailId in existingContact.Emails.Select(e => e.Id)
+                     .Except(contact.Emails.Select(e => e.Id)))
+        {
+            // var emailToRemove = existingContact.Emails.FirstOrDefault(e => e.Id == missingEmailId);
+            var emailToRemove = _emailRepository.FindById(missingEmailId);
+            if (emailToRemove == null)
+            {
+                continue;
+            }
+
+            _emailRepository.Delete(emailToRemove);
+        }
+
+        _contactRepository.Update(contact);
         _applicationContext.SaveChanges();
     }
-    
+
     #endregion update
-    
+
     #region delete
 
     /// <summary>
@@ -114,6 +147,20 @@ public class ContactService
             _applicationContext.SaveChanges();
         }
     }
-    
+
+    /// <summary>
+    /// Deletes an Email with supplied id
+    /// </summary>
+    /// <param name="id"></param>
+    public void DeleteEmailById(long id)
+    {
+        var email = GetEmailById(id);
+        if (email != null)
+        {
+            _emailRepository.Delete(email);
+            _applicationContext.SaveChanges();
+        }
+    }
+
     #endregion delete
 }

@@ -3,15 +3,23 @@ using AsiTest.Business.Services;
 
 namespace AsiTest.Business.Data.Testing;
 
-public class ApplicationDataSeeder
+/// <summary>
+/// Generates data for initial use within the database
+/// </summary>
+public class ApplicationDataSeeder : IApplicationDataSeeder
 {
-    private readonly ContactService _contactService;
+    private readonly IContactService _contactService;
 
-    public ApplicationDataSeeder(ContactService contactService)
+    public ApplicationDataSeeder(IContactService contactService)
     {
         _contactService = contactService;
     }
 
+    /// <summary>
+    /// Leverages (mild) randomness to generate various entries within the database
+    /// </summary>
+    /// <param name="contactGenerationAmount"></param>
+    /// <param name="emailMax"></param>
     public void InitializeData(int contactGenerationAmount = 25, int emailMax = 5)
     {
         var random = new Random();

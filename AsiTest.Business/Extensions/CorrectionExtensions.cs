@@ -2,6 +2,9 @@ using AsiTest.Business.Entities.Contact;
 
 namespace AsiTest.Business.Extensions;
 
+/// <summary>
+/// A place to put Extension methods that would be used to enforce certain rules
+/// </summary>
 public static class CorrectionExtensions
 {
     /// <summary>
@@ -17,7 +20,7 @@ public static class CorrectionExtensions
             email.IsPrimary = false;
         }
 
-        if (emails.All(e => !e.IsPrimary))
+        if (emails.Count > 0 && emails.All(e => !e.IsPrimary))
         {
             emails.First().IsPrimary = true;
         }

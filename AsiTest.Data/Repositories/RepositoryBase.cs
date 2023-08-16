@@ -7,7 +7,8 @@ namespace AsiTest.Business.Repositories;
 /// Base repository used for direct database interactions
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class RepositoryBase<T> : IRepositoryBase<T> where T : class
+/// <typeparam name="TU"></typeparam>
+public class RepositoryBase<T,TU> : IRepositoryBase<T,TU> where T : class
 {
     private readonly DbContext _repositoryContext;
     public RepositoryBase(DbContext repositoryContext) 
@@ -20,7 +21,7 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public T? FindById(long id)
+    public T? FindById(TU id)
     {
         return _repositoryContext.Find<T>(id);
     }

@@ -6,7 +6,7 @@ namespace AsiTest.Business.Repositories;
 /// <summary>
 /// Repository for CRUD operations on Contact entities
 /// </summary>
-public class ContactRepository : RepositoryBase<Contact>
+public class ContactRepository : RepositoryBase<Contact, long>
 {
     public ContactRepository(ApplicationContext applicationContext) : base(applicationContext)
     {

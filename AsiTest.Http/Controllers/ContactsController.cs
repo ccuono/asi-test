@@ -11,17 +11,16 @@ namespace AsiTest.Http.Controllers;
 [Route("[controller]")]
 public class ContactsController : ControllerBase
 {
-    private readonly ILogger<ContactsController> _logger;
-    private readonly ContactService _contactService;
+    private readonly IContactService _contactService;
 
     /// <summary>
     /// Constructor
+    /// Removed `ILogger&lt;ContactsController&gt; logger` since it is not used
     /// </summary>
     /// <param name="logger"></param>
     /// <param name="contactService"></param>
-    public ContactsController(ILogger<ContactsController> logger, ContactService contactService)
+    public ContactsController(IContactService contactService)
     {
-        _logger = logger;
         _contactService = contactService;
     }
 
