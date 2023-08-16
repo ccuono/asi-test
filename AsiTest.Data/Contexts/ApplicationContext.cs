@@ -1,8 +1,12 @@
 using AsiTest.Business.Entities.Contact;
 using Microsoft.EntityFrameworkCore;
 
-namespace AsiTest.Business.Contexts.InMemory;
+namespace AsiTest.Business.Contexts;
 
+/// <summary>
+/// The primary application context used
+/// This is where we could override various methods like OnModelCreating
+/// </summary>
 public class ApplicationContext : DbContext
 {
     public ApplicationContext(DbContextOptions dbContextOptions) : base(dbContextOptions)

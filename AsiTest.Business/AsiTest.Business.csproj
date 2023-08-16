@@ -4,12 +4,10 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>AsiTest.Business</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="DateOnlyTimeOnly.AspNet.Swashbuckle" Version="2.1.1" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.10" />
+      <ProjectReference Include="..\AsiTest.Data\AsiTest.Data.csproj" />
     </ItemGroup>
 
 </Project>
