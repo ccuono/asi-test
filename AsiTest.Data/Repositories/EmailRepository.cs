@@ -7,7 +7,8 @@ namespace AsiTest.Business.Repositories;
 /// Repository for CRUD operations on Email entities
 /// </summary>
 public class EmailRepository : RepositoryBase<Email, long>
-{ public EmailRepository(ApplicationContext applicationContext) : base(applicationContext)
+{
+    public EmailRepository(ApplicationContext applicationContext) : base(applicationContext)
     {
     }
 }
