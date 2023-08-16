@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AsiTest.Business.Contexts;
 
+/// <summary>
+/// The primary application context used
+/// This is where we could override various methods like OnModelCreating
+/// </summary>
 public class ApplicationContext : DbContext
 {
     public ApplicationContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
@@ -11,11 +15,4 @@ public class ApplicationContext : DbContext
     
     public DbSet<Contact>? Contacts { get; set; }
     public DbSet<Email>? Emails { get; set; }
-    
-    // protected override void OnModelCreating(ModelBuilder modelBuilder)
-    // {
-    //     modelBuilder.Entity<Contact>()
-    //         .HasMany<Email>();
-    // }
-    
 }
